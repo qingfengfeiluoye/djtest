@@ -1,0 +1,49 @@
+{% extends "base/head_foot_base.html" %}
+
+{% block title %}
+    payInfo
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_684044_un7umbuwwfp.css">
+    <link rel="stylesheet" href="/static/css/doc/docDownload.css">
+{% endblock %}
+
+{% block main %}
+    <!-- main start -->
+    <main id="main">
+        <div class="w1200 clearfix">
+            <!-- main-contain start  -->
+            <div class="main-contain ">
+                <div class="banner">
+                    <img src="https://res.shiguangkey.com//file/201806/22/20180622162245762333020.jpg" alt="">
+                </div>
+                <div class="pay-doc-contain">
+                    <ul class="pay-list">
+                        <li class="pay-item">
+                            <div class="pay-img doc"></div>
+                            <div class="pay-contain">
+                                <p class="pay-title">标题</p>
+                                <p class="pay-desc">内容内容内容内容内容内容</p>
+                                <a href="javascript:void(0);" class="pay-price">下载</a>
+                            </div>
+                        </li>
+
+                        <li class="pay-item">
+                            <div class="pay-img doc"></div>
+                            <div class="pay-contain">
+                                <p class="pay-title">标题</p>
+                                <p class="pay-desc">内容内容内容内容内容内容</p>
+                                <a href="javascript:void(0);" class="pay-price">下载</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- main-contain  end -->
+            {% include "base/side_base.html" %}
+        </div>
+    </main>
+    <!-- main end -->
+{% endblock %}
+
