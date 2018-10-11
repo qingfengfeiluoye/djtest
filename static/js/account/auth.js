@@ -14,7 +14,8 @@ $(function () {
             };
             if (status) {
                 data["remember"] = status;
-            };
+            }
+            ;
             $.ajax({
                 url: "/account/login/",
                 method: "post",
@@ -43,6 +44,15 @@ $(function () {
         } else {
             message.showError("手机号和密码不能为空");
         }
+    });
 
+    let $graphCaptchaBtn = $(".form-item .captcha-graph-img");
+    let $captchaImg = $graphCaptchaBtn.find("img");
+    $graphCaptchaBtn.click(function () {
+        //获取现有src图片url
+        let oldSrc = $captchaImg.attr("src");
+        let newSrc = oldSrc.split("?")[0] + "?_=" + Date.now();
+        //设置src为新图片url
+        $captchaImg.attr("src", newSrc);
     });
 });

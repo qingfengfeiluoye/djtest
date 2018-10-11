@@ -2,9 +2,13 @@ from django.shortcuts import render, redirect, reverse
 from django.views import View
 from .forms import LoginForm
 from django.contrib.auth import authenticate, login, logout
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.utils.decorators import method_decorator
+from untils.captcha.make_captcha import Captcha
+from io import BytesIO
+from untils.mached import mached
+from untils.dysms_python.demo_sms_send import send_sms
 
 
 # 不验证用csrf_exempt，验证用csrf_protect
@@ -42,6 +46,36 @@ def logout_view(request):
     return redirect(reverse("account:login"))
 
 
+def make_captcha(request):
+    text, img = Captcha.gene_code()
+    # print(text)
+    # print(img)
+    # 把验证码设置到session上去
+    # request.session["captcha"] = captcha
+    # 把验证码存到memcached数据库
+    mached.set_key("captcha", text)
+    out = BytesIO()
+    # 以png格式保存图片
+    img.save(out, "png")
+    # 游标返回起始位置
+    out.seek(0)
+    # 设置响应类型
+    res = HttpResponse(content_type="image/png")
+    # 把文件写入res
+    res.write(out.read())
+    return res
+
+
+@method_decorator([csrf_exempt, ], name="dispatch")
 class RegisterView(View):
     def get(self, request, *args, **kwargs):
         return render(request, "account/register.html")
+
+
+def send_message(request):
+    import uuid
+    import random
+    id1 = uuid.uuid1()
+    params = "{\"code\":\"%s\"}" % random.randint(100000, 1000000)
+    send_sms(id1, "13631476567", "付帅帅", "SMS_142947701", params)
+    return HttpResponse("ssss")
