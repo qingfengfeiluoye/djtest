@@ -5,7 +5,7 @@ mc = memcache.Client(["127.0.0.1:11211"], debug=True)
 
 
 # 设置key
-def set_key(key=None, val=None, time=300):
+def set_key(key=None, val=None, time=6000):
     if key:
         mc.set(key, val, time)
         return True
