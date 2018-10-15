@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'apps.news.apps.NewsConfig',
     'apps.course.apps.CourseConfig',
     'apps.account.apps.AccountConfig',
-    'apps.doc.apps.DocConfig'
+    'apps.doc.apps.DocConfig',
+    'apps.admin.apps.AdminConfig'
 ]
 
 MIDDLEWARE = [

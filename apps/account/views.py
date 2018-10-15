@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, reverse
 from django.views import View
-from .forms import LoginForm, SmsForm, RegisterForm
+from .forms import LoginForm, RegisterForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
@@ -8,7 +8,7 @@ from django.utils.decorators import method_decorator
 from untils.captcha.make_captcha import Captcha
 from io import BytesIO
 from untils.mached import mached
-from untils.dysms_python.demo_sms_send import send_sms
+from untils.sms_msg.send_captcha import send_captcha
 from .models import User
 
 
@@ -54,7 +54,7 @@ def make_captcha(request):
     # 把验证码设置到session上去
     # request.session["img_captcha"] = text
     # 把验证码存到memcached数据库
-    mached.set_key("img_captcha", text)
+    mached.set_key(text.lower(), text)
     out = BytesIO()
     # 以png格式保存图片
     img.save(out, "png")
@@ -74,53 +74,27 @@ class RegisterView(View):
 
     def post(self, request, *args, **kwargs):
         form = RegisterForm(request.POST)
-        if form.is_valid():
+        # print(form)
+
+        if form.is_valid() and form.check_captcha():
+            # 获取前端数据
             telephone = form.cleaned_data.get("telephone")
             password = form.cleaned_data.get("password")
-            password_repeat = form.cleaned_data.get("password_repeat")
             username = form.cleaned_data.get("username")
-            sms_captcha = form.cleaned_data.get("sms_captcha")
-            img_captcha = form.cleaned_data.get("img_captcha")
             user = User.objects.filter(telephone=telephone).first()
-            mc_sms_captcha = mached.get_key("sms_captcha")
-            mc_img_captcha = mached.get_key("img_captcha")
-            # print(int(mc_sms_captcha), type(sms_captcha))
-            # print(mc_img_captcha, img_captcha)
-            if user:
+            if user:  # 判断用户是否存在
                 return JsonResponse({"code": 0, "msg": "该手机号码已注册，请登录"})
-            elif password != password_repeat:
-                return JsonResponse({"code": 0, "msg": "两次密码输入不一致，请重新输入"})
-            else:
-                if sms_captcha.isdigit():
-                    if int(sms_captcha) == int(mc_sms_captcha) and img_captcha == mc_img_captcha:
-                        user = User.objects._create_user(telephone, username, password)
-                        login(request, user)
-                        request.session.set_expiry(0)
-                        return JsonResponse({"code": 1, "msg": "注册成功"})
-                else:
-                    return JsonResponse({"code": 0, "msg": "验证码输入错误，请重新输入"})
-                return JsonResponse({"code": 0, "msg": "手机验证码输入错误，请重新输入"})
-        return JsonResponse({"code": 0, "msg": "验证码输入错误，请重新输入"})
+            user = User.objects.create_user(telephone, username, password)
+            login(request, user)  # 注册成功后自动登录
+            request.session.set_expiry(0)  # 设置session在关闭浏览器就过期
+            return JsonResponse({"code": 1, "msg": "注册成功"})
+        msg = form.get_error()
+        return JsonResponse({"code": 0, "msg": msg})
 
 
-@method_decorator([csrf_exempt, ], name="dispatch")
-class SendMessageView(View):
-    def get(self, request, *args, **kwargs):
-        pass
-
-    def post(self, request, *args, **kwargs):
-        form = SmsForm(request.POST)
-        if form.is_valid():
-            telephone = form.cleaned_data.get("telephone")
-            print(telephone)
-            import uuid
-            import random
-            id1 = uuid.uuid1()
-            captcha_num = random.randint(100000, 1000000)
-            mached.set_key("sms_captcha", captcha_num)
-            params = "{\"code\":\"%s\"}" % captcha_num
-            send_sms(id1, telephone, "付帅帅", "SMS_142947701", params)
-            return JsonResponse({"code": 1, "msg": "验证码发送成功"})
-        else:
-            msg = form.get_error()
-            return JsonResponse(msg)
+def send_message(request):
+    telephone = request.GET.get("telephone")
+    # print(telephone)
+    message = send_captcha(telephone)
+    # print(message)
+    return JsonResponse(str(message, encoding='utf-8'), safe=False)
