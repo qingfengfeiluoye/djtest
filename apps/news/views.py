@@ -69,9 +69,10 @@ class NewsAddComments(View):
         return status_code.params_error(message=form.get_error())
 
 
-# 打开某条新闻时调用，查出改新闻的所有评论
+# 打开某条新闻时调用，查出该新闻的所有评论
 def news_comments(request):
     news_id = int(request.GET.get("news_id"))
+    print(news_id)
     news = NewsPub.objects.filter(id=news_id, is_delete=False).first()
     if news:
         # 反向查询获得指定新闻的所有评论

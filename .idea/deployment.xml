@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="pyvip@192.168.137.128:22" autoUploadExternalChanges="true">
+  <component name="PublishConfigData" autoUpload="On explicit save action" serverName="pyvip@192.168.137.129:22" autoUploadExternalChanges="true">
     <serverData>
-      <paths name="pyvip@192.168.137.128:22">
+      <paths name="pyvip@192.168.137.129:22">
         <serverdata>
           <mappings>
             <mapping deploy="/home/pyvip/djtest" local="$PROJECT_DIR$" />
-          </mappings>
-        </serverdata>
-      </paths>
-      <paths name="pyvip@192.168.137.128:22 (1)">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>
