@@ -49,9 +49,9 @@ class RegisterForm(forms.Form, FormErrors):
         password = self.cleaned_data.get("password")
         password_repeat = self.cleaned_data.get("password_repeat")
         if password != password_repeat:
-            return self.add_error({"password": "两次输入密码不一致，请重新输入"})
-        elif not mc_img_captcha and mc_img_captcha != img_captcha:
-            return self.add_error({"img_captcha": "图形验证码输入错误，请重新输入"})
-        elif not mc_sms_captcha and mc_sms_captcha != sms_captcha:
-            return self.add_error({"sms_captcha": "短信验证码输入错误，请重新输入"})
+            return self.add_error("password", "两次输入密码不一致，请重新输入")
+        if not mc_img_captcha and mc_img_captcha != img_captcha:
+            return self.add_error("img_captcha", "图形验证码输入错误，请重新输入")
+        if not mc_sms_captcha and mc_sms_captcha != sms_captcha:
+            return self.add_error("sms_captcha", "短信验证码输入错误，请重新输入")
         return True

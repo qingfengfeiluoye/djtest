@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'apps.course.apps.CourseConfig',
     'apps.account.apps.AccountConfig',
     'apps.doc.apps.DocConfig',
-    'apps.admin.apps.AdminConfig'
+    'apps.admin.apps.AdminConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -122,7 +123,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = False
+USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
@@ -132,3 +133,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 AUTH_USER_MODEL = "account.User"
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+# 一页显示新闻的数量(首页显示)
+ONE_PAGE_NEWS_COUNT = 2
+# 一页新闻的数量(管理页显示)
+ONE_MANAGE_PAGE_NEWS_COUNT = 2

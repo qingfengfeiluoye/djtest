@@ -1,4 +1,4 @@
-const fAlert = {
+const ALERT = {
   /*
       功能：提示错误
       参数：

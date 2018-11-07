@@ -116,11 +116,11 @@ $(function () {
     let $registerBtn = $(".form-item .register-btn");
     $registerBtn.click(function () {
         let telVal = $("input[name=telephone]").val();
-        let sms_captchaVal = $("input[name=sms_captcha]").val();
+        let sms_captchaVal = $("input[name=sms_captcha]").val().toLowerCase();
         let usernameVal = $("input[name=username]").val();
         let pwdVal = $("input[name=password]").val();
         let pwd_reVal = $("input[name=password_repeat]").val();
-        let img_captcha = $("input[name=captcha_graph]").val();
+        let img_captcha = $("input[name=captcha_graph]").val().toLowerCase();
         console.log(pwd_reVal, pwdVal)
         if (telVal && sms_captchaVal && usernameVal && pwdVal && pwd_reVal && img_captcha) {
             if (pwdVal === pwd_reVal) {

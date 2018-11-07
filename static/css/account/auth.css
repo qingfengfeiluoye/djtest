@@ -100,6 +100,8 @@
 
 .form-contain .login-btn,
 .form-contain .register-btn,
+.form-contain .check_captcha-btn,
+.form-contain .change_password-btn,
 .form-contain .done-btn {
   display: block;
   text-align: center;

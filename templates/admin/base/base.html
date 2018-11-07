@@ -25,6 +25,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
           page. However, you can choose any other skin. Ma  ke sure you
           apply the skin class to the body tag so the changes take effect. -->
     <link rel="stylesheet" href="/static/css/admin/skins/skin-green.css">
+    <link rel="stylesheet" href="/static/css/base/sweetalert.css">
     {% block link %}
 
     {% endblock %}
@@ -133,6 +134,13 @@ desired effect
                 <li class="header">头部</li>
                 <!-- Optionally, you can add icons to the links -->
                 <li class="active"><a href="{% url "admin:index" %}"><i class="fa fa-home"></i> <span>首页</span></a></li>
+                <li class="header">新闻相关</li>
+                <li class="active"><a href="{% url "admin:new_tag_manage" %}"><i class="fa fa-tags"></i>
+                    <span>新闻标签管理</span></a></li>
+                <li class="active"><a href="{% url "admin:news_pub" %}"><i class="fa fa-edit"></i>
+                    <span>新闻发布</span></a></li>
+                <li class="active"><a href="{% url "admin:news_manage" %}"><i class="fa fa-map-o"></i>
+                    <span>新闻管理</span></a></li>
             </ul>
             <!-- /.sidebar-menu -->
         </section>
@@ -184,6 +192,10 @@ desired effect
 <script src="/static/js/admin/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/static/js/admin/adminlte.min.js"></script>
+<script src="/static/js/base/sweetalert.min.js"></script>
+<script src="/static/js/base/fsweetalert.js"></script>
+<script src="/static/js/base/message.js"></script>
+<script src="/static/js/base/common.js"></script>
 {% block script %}
 
 {% endblock %}

@@ -7,10 +7,9 @@ class UserManager(BaseUserManager):
         """
         Create and save a user with the given username, email, and password.
         """
-        username = self.model.normalize_username(username)
-        user = self.model(telephone=telephone, username=username, **extra_fields)
+        user = self.model(username=username, telephone=telephone, **extra_fields)
         user.set_password(password)  # 密码加密
-        user.save(using=self._db)
+        user.save()
         return user
 
     def create_user(self, telephone, username, password, **extra_fields):

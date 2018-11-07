@@ -1,0 +1,54 @@
+{% extends "base/head_foot_base.html" %}
+
+{% block title %}
+    找回密码
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="/static/css/account/auth.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_684044_un7umbuwwfp.css">
+{% endblock %}
+
+{% block main %}
+    <!-- container start -->
+    <main id="container">
+        <div class="register-contain">
+            <div class="top-contain">
+                <h4 class="please-register">找回密码</h4>
+                {#                <a href="{% url "account:login" %}" class="login">立即登录 &gt;</a>#}
+            </div>
+            <form action="" method="post" class="form-contain">
+                {% if captcha %}
+                    <div class="form-item">
+                        <input type="tel" placeholder="请输入手机号" name="telephone" class="form-control" autocomplete="off"
+                               autofocus>
+                    </div>
+                    <div class="form-item">
+                        <input type="text" placeholder="请输入短信验证码" name="sms_captcha" class="form-captcha"
+                               autocomplete="off">
+                        <a href="javascript:void(0);" class="sms-captcha" title="发送验证码">发送验证码</a>
+                    </div>
+                    <div class="form-item">
+                        <a href="javascript:void(0);" class="check_captcha-btn" style="display: block">下一步</a>
+                    </div>
+                {% endif %}
+                {% if telephone %}
+                    <div class="form-item">
+                        <input type="password" placeholder="请输入密码" name="password" class="form-control">
+                    </div>
+                    <div class="form-item">
+                        <input type="password" placeholder="请确认密码" name="password_repeat" class="form-control">
+                    </div>
+                    <div class="form-item">
+                        <a href="javascript:void(0);" class="change_password-btn" style="display: block">点击确认</a>
+                    </div>
+                {% endif %}
+            </form>
+        </div>
+    </main>
+    <!-- container end -->
+{% endblock %}
+
+{% block script %}
+    <script src="/static/js/account/change_pwd.js"></script>
+{% endblock %}

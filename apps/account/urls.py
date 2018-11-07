@@ -8,4 +8,5 @@ urlpatterns = [
    path('register/', views.RegisterView.as_view(), name="register"),
    path('make_captcha/', views.make_captcha, name="make_captcha"),
    path('send_message/', views.send_message, name="send_message"),
+   path('change_password/', views.ChangPassword.as_view(), name="change_password"),
 ]

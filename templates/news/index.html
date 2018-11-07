@@ -1,14 +1,13 @@
-{% extends "base/head_foot_base.html" %}
-
+{% extends 'base/head_foot_base.html' %}
+{% load datetime_filter %}
 {% block title %}
-    IndexPage
+    首页
 {% endblock %}
 
 {% block link %}
     <link rel="stylesheet" href="/static/css/news/index.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_684044_un7umbuwwfp.css">
 {% endblock %}
-
 
 {% block main %}
     <!-- main start -->
@@ -20,16 +19,16 @@
                 <div class="banner">
                     <ul class="pic">
                         <li style="display:block;"><a href="javascript:void(0);"><img
-                                src="https://res.shiguangkey.com//file/201806/19/20180619142252602590185.jpg"
+                                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537264084920&di=674290bae4e0f33ac252cff0ef95ec3f&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2F3%2F57a1548ddd149.jpg"
                                 alt="test"></a></li>
                         <li><a href="javascript:void(0);"><img
-                                src="https://res.shiguangkey.com//file/201806/19/20180619141337485823895.jpg"
+                                src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2126622145,1468696620&fm=26&gp=0.jpg"
                                 alt="test"></a></li>
                         <li><a href="javascript:void(0);"><img
-                                src="https://res.shiguangkey.com//file/201806/21/20180621150342030454625.jpg"
+                                src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=2775064463,1890836574&fm=26&gp=0.jpg"
                                 alt="test"></a></li>
                         <li><a href="javascript:void(0);"><img
-                                src="https://res.shiguangkey.com//file/201805/17/20180517113424433990524.jpg"
+                                src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3182804019,3354432715&fm=26&gp=0.jpg"
                                 alt="test"></a></li>
                     </ul>
                     <a href="javascript:void(0);" class="btn prev">
@@ -51,28 +50,28 @@
                         <li>
                             <a href="javascript:void(0);" target="_blank">
                                 <div class="recommend-thumbnail">
-                                    <img src="https://static-image.xfz.cn/1529218165_112.jpg-website.news.list"
+                                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537264084300&di=8f55d3ddef645bd7de02024e63224cd3&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201506%2F09%2F20150609130218_cKEZm.jpeg"
                                          alt="title">
                                 </div>
-                                <p class="info">社交电商，终究还是逃不脱阿里的势力范围</p>
+                                <p class="info">人生苦短，我用Python</p>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" target="_blank">
                                 <div class="recommend-thumbnail">
-                                    <img src="https://static-image.xfz.cn/1529218165_112.jpg-website.news.list"
+                                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537264084300&di=8f55d3ddef645bd7de02024e63224cd3&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201506%2F09%2F20150609130218_cKEZm.jpeg"
                                          alt="title">
                                 </div>
-                                <p class="info">社交电商，终究还是逃不脱阿里的势力范围</p>
+                                <p class="info">人生苦短，我用Python</p>
                             </a>
                         </li>
                         <li>
                             <a href="javascript:void(0);" target="_blank">
                                 <div class="recommend-thumbnail">
-                                    <img src="https://static-image.xfz.cn/1529218165_112.jpg-website.news.list"
+                                    <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1537264084300&di=8f55d3ddef645bd7de02024e63224cd3&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fblog%2F201506%2F09%2F20150609130218_cKEZm.jpeg"
                                          alt="title">
                                 </div>
-                                <p class="info">社交电商，终究还是逃不脱阿里的势力范围</p>
+                                <p class="info">人生苦短，我用Python</p>
                             </a>
                         </li>
                     </ul>
@@ -80,72 +79,54 @@
                     <!--  news-nav start-->
                     <nav class="news-nav">
                         <ul class="clearfix">
-                            <li class="active"><a href="javascript:void(0)" data-name="1">最新资讯</a></li>
-                            <li><a href="javascript:void(0)" data-name="2">热点新闻</a></li>
-                            <li><a href="javascript:void(0)" data-name="3">生活报到</a></li>
-                            <li><a href="javascript:void(0)" data-name="4">技术新闻</a></li>
+                            <li class="active"><a href="javascript:void(0)">最新资讯</a></li>
+                            {% for tag in tags %}
+                                <li><a href="javascript:void(0)" data-id="{{ tag.id }}">{{ tag.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </nav>
                     <!--  news-nav end -->
                     <!-- news-contain start -->
                     <div class="news-contain">
                         <ul class="news-list">
-                            <li class="news-item">
-                                <a href="https://www.shiguangkey.com/course/2380" class="news-thumbnail"
-                                   target="_blank">
-                                    <img src="https://res.shiguangkey.com//file/201806/01/20180601202006677835073.png"
-                                         alt="title">
-                                </a>
-                                <div class="news-content">
-                                    <h4 class="news-title"><a href="javascript:void(0);">争议中的拼多多，面对的不只是舆论危机</a></h4>
-                                    <p class="news-details">
-                                        对于拼多多而言，当下面临的最大问题，并不是什么舆论危机，舆论危机只是结果，不是原因。否则，应对危机的对策就要跑偏了。</p>
-                                    <div class="news-other">
-                                        <span class="news-type">热点</span>
-                                        <span class="news-time">1分钟前</span>
-                                        <span class="news-author">付帅帅</span>
+                            {% for new in news %}
+                                <li class="news-item">
+                                    <a href="{% url "news:news_details" news_id=new.id %}" class="news-thumbnail"
+                                       target="_blank">
+                                        <img src="{{ new.img_url }}"
+                                             alt="title">
+                                    </a>
+                                    <div class="news-content">
+                                        <h4 class="news-title"><a
+                                                href="{% url "news:news_details" news_id=new.id %}">{{ new.title }}</a>
+                                        </h4>
+                                        <p class="news-details">
+                                            {{ new.desc|safe }}</p>
+                                        <div class="news-other">
+                                            <span class="news-type">{{ new.tag.name }}</span>
+                                            <span class="news-time">{{ new.pup_time|time_filter }}</span>
+                                            <span class="news-author">{{ new.author.username }}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="news-item">
-                                <a href="https://www.shiguangkey.com/course/2380" class="news-thumbnail"
-                                   target="_blank">
-                                    <img src="https://res.shiguangkey.com//file/201806/01/20180601202006677835073.png"
-                                         alt="title">
-                                </a>
-                                <div class="news-content">
-                                    <h4 class="news-title"><a href="javascript:void(0);">争议中的拼多多，面对的不只是舆论危机</a></h4>
-                                    <p class="news-details">
-                                        对于拼多多而言，当下面临的最大问题，并不是什么舆论危机，舆论危机只是结果，不是原因。否则，应对危机的对策就要跑偏了。</p>
-                                    <div class="news-other">
-                                        <span class="news-type">热点</span>
-                                        <span class="news-time">1分钟前</span>
-                                        <span class="news-author">付帅帅</span>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            {% endfor %}
                         </ul>
-                        <div class="loading-img"></div>
                     </div>
                     <!-- news-contain end -->
                     <!-- btn-more start -->
-                    <a href="javascript:void(0);" class="btn-more">加载更多</a>
+                    <a href="javascript:void(0);" class="btn-more" id="btn-more" data-page="2">加载更多</a>
                     <!-- btn-more end -->
                 </div>
                 <!-- content end -->
             </div>
-            <!-- main-contain  end -->
-
-        {% include "base/side_base.html" %}
+            <!-- main-contain end -->
+            {% include 'base/side_base.html' %}
         </div>
     </main>
     <!-- main end -->
 {% endblock %}
 
 {% block script %}
-    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
-    <script src="/static/js/base/common.js"></script>
-    <script src="/static/js/index.js"></script>
+    <script src="/static/js/news/index.js"></script>
+    <script src="/static/js/news/newscomments.js"></script>
 {% endblock %}
-
-
